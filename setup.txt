@@ -2,33 +2,57 @@
 # that can be used to prepare the environment (or try Vagrant, if can create
 # a Desktop setup.
 
-sudo apt-get update -y && apt-get upgrade -y
-sudo apt-get install build-essential python-virtualenv python-pip python-dev pep8 pylint libxml2 libxml2-dev libxml++2.6-dev libxslt1.1 libxslt1-dev git bzr emacs23 chromium-browser pymacs sux
+# Assumes you have passwordless sudo set up and run this from the git repo area
+sudo apt-get install -y ntp
+# Setup timeserver
+for i in 0 1 2 3
+  do
+    read -p "Enter time server name or return to exit:" server
+    if [ -z server ]
+      then
+        break
+    fi
+    sudo sed -i "s/server $i.ubuntu.pool.ntp.org/server $server/g" /etc/ntp.conf
+  done
+sudo service ntp restart
 
-# TODO: Install Eclipse IDE and PyDev
+mkdir ~/.ssh
+chmod 700 .ssh
 
-cp ~/Ubuntu\ One/devstack-env/.gitconfig ~
-cp ~/Ubuntu\ One/devstack-env/.bash* ~
-cp -r Ubuntu\ One/devstack-env/.emacs.d/* ~/.emacs.d/
-# cp ~/Ubuntu\ One/keys/os.* ~/.ssh/
-cp ~/Ubuntu\ One/devstack-env/.git-completion.bash ~
-cp ~/Ubuntu\ One/devstack-env/.gitconfig ~
+echo "TODO: Run ssh-keygen, create key and put public key up on Gerrit"
 
+read -p "Enter username for Git:" user
+read -p "Enter full email address for Git: email
+git config --global user.name "$user
+git config --global user.email "$email"
+
+# Graphical diff
+sudo apt-get install -y meld
+cp difftool.py ~
+
+cp .gitconfig ~
+cp .bash* ~
+cp -r .emacs.d/* ~/.emacs.d/
+cp .git-completion.bash ~
+cp .gitconfig ~
+
+apt-get update -y && apt-get upgrade -y
+sudo apt-get install -y terminator qgit build-essential python-virtualenv python-pip python-dev pep8 pylint ipython chromium-browser emacs23 bzr pymacs
 
 sudo pip install virtualenvwrapper rope ropemacs
+echo "TODO: Check to see if .bashrc has virtualenvwrapper set up"
 mkdir ~/.virtualenvs
 
-# TODO: Check to see if .bashrc has virtualenvwrapper set up
+echo "TODO: Install Eclipse IDE and PyDev"
 
 
 # For code reviews
-ssh-agent $SHELL
-ssh-add
+# ssh-agent $SHELL
+# ssh-add
 
-# Or use 'sux' command - sudo sux [user]
-
-mkdir ~/.virtualenvs
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh 
-mkvirtualenv env
-workon env
+# For the following, see if already have set up some in .bashrc
+# mkdir ~/.virtualenvs
+# export WORKON_HOME=~/.virtualenvs
+# source /usr/local/bin/virtualenvwrapper.sh 
+# mkvirtualenv env
+# workon env

@@ -1,0 +1,3 @@
+# Run this script as root...
+echo "$USER ALL=(ALL) NOPASSWD: ALL" | tee /etc/sudoers.d/devstack
+chmod 0440 /etc/sudoers.d/devstack
