@@ -1,0 +1,34 @@
+# TODO Update this based on the latest setup. Consider converting to a script
+# that can be used to prepare the environment (or try Vagrant, if can create
+# a Desktop setup.
+
+sudo apt-get update -y && apt-get upgrade -y
+sudo apt-get install build-essential python-virtualenv python-pip python-dev pep8 pylint libxml2 libxml2-dev libxml++2.6-dev libxslt1.1 libxslt1-dev git bzr emacs23 chromium-browser pymacs sux
+
+# TODO: Install Eclipse IDE and PyDev
+
+cp ~/Ubuntu\ One/devstack-env/.gitconfig ~
+cp ~/Ubuntu\ One/devstack-env/.bash* ~
+cp -r Ubuntu\ One/devstack-env/.emacs.d/* ~/.emacs.d/
+# cp ~/Ubuntu\ One/keys/os.* ~/.ssh/
+cp ~/Ubuntu\ One/devstack-env/.git-completion.bash ~
+cp ~/Ubuntu\ One/devstack-env/.gitconfig ~
+
+
+sudo pip install virtualenvwrapper rope ropemacs
+mkdir ~/.virtualenvs
+
+# TODO: Check to see if .bashrc has virtualenvwrapper set up
+
+
+# For code reviews
+ssh-agent $SHELL
+ssh-add
+
+# Or use 'sux' command - sudo sux [user]
+
+mkdir ~/.virtualenvs
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh 
+mkvirtualenv env
+workon env
