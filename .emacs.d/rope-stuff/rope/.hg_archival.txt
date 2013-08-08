@@ -1,0 +1,5 @@
+repo: e4a32d30ba729e5ab7feee7ee1756ee86342453a
+node: 61c39fea21febe1ddcdac5d7cd8feae896d824c4
+branch: trunk
+latesttag: 0.9.4
+latesttagdistance: 2

@@ -1,0 +1,16 @@
+[user]
+	name = Paul Michali
+	email = pcm@cisco.com
+[alias]
+	qlog = log --graph --abbrev-commit --pretty=oneline
+        flog = log --all --pretty=format:'%h %ad | %s%d' --graph --date=short
+        clog = log --graph --pretty=\"tformat:%C(yellow)%h%Creset %Cgreen(%ar)%Creset %C(bold blue)<%an>%Creset %C(red)%d%Creset %s\"
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(green)%an%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+[credential]
+	helper = osxkeychain
+[core]
+	editor = emacs
+[color]
+	ui = always
+[gui]
+	recentrepo = /opt/stack/quantum
